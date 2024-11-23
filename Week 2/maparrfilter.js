@@ -44,6 +44,6 @@ function filterlogic(n){
         return false
     }
 }
-
+ 
 const filteranswer = input.filter(filterlogic)
 console.log(filteranswer)
