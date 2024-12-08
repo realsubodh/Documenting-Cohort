@@ -18,6 +18,21 @@ const app = express();
 const schema = zod.array(zod.number()); // expecting an array of numbers
 // schema is used to define the structure of your input, which is in our case is array of number of kidneys
 
+/*
+Suppose we wanna to add all these input validations in our zod, this is how we do it
+   email: string => email (@.com)
+   password: at least 8 letters
+   country: "IN", "US"
+*/
+
+const schema2 = zod.object({
+  email: zod.string(),
+  password: zod.string(),
+  country: zod.literal("IN").or(zod.literal("US")), // literals means as it is
+  kidneys: zod.array(zod.number()),
+});
+// you can add other primitives by taking the reference from the zod doc
+
 app.use(express.json());
 
 app.post("/health-checkup", function (req, res) {
@@ -26,8 +41,7 @@ app.post("/health-checkup", function (req, res) {
   if (!response.success) {
     res.status(411).json({
       msg: "input is invalid",
-      errors: response.error.errors
-      
+      errors: response.error.errors,
     });
   } else {
     res.send({
@@ -37,3 +51,19 @@ app.post("/health-checkup", function (req, res) {
 });
 
 app.listen(3000);
+
+// remember zod can be used independent of express
+
+function validateInput(obj) {
+  const schema = zod.object({
+    email: zod.string().email(),
+    password: zod.string.min(8),
+  });
+  const response = schema.safeParse(obj);
+  console.log(response);
+}
+
+validateInput({
+  email:"harkirat@gmail.com",
+  password:"sfjsfkjffhghdfhgid"
+})
