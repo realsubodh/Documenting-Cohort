@@ -66,4 +66,4 @@ function validateInput(obj) {
 validateInput({
   email:"harkirat@gmail.com",
   password:"sfjsfkjffhghdfhgid"
-})
+})  
