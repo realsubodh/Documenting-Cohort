@@ -52,9 +52,9 @@
 
     // realtime server todos fetching
     window.setInterval(async function () {
-        const res = await fetch('https://dummyjson.com/todos')
+        const res = await fetch('https://sum-server.100xdevs.com/todos')
         const json = await res.json();
-        updateDomAccToState(json)
+        updateDomAccToState(json.todos)
     }, 1000)
 </script>
 
