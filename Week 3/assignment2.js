@@ -14,7 +14,7 @@ const app = express();
 app.use(express.json());
 
 mongoose.connect(
-  "mongodb+srv://subodhsingh3477:FridaY7880@cluster0.k5y3sbt.mongodb.net/userappnew"
+  "Mongo Url"
 );
 
 const User = mongoose.model("Users", {

@@ -64,7 +64,7 @@ function decodeJwt(token) {
     } else {
         return false;
     }
-}
+}e
 
 module.exports = {
   signJwt,

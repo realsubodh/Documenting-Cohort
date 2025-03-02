@@ -6,7 +6,7 @@ const app = express()
 app.use(express.json()) // in built middleware
 
 
-mongoose.connect("mongodb+srv://subodhsingh3477:FridaY7880@cluster0.k5y3sbt.mongodb.net/userappnew")
+mongoose.connect("Mongo Url")
 
 
 // mongoose expect us to first describe the somehow the schema will look alike
