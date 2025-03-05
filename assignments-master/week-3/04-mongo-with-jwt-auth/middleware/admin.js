@@ -1,5 +1,5 @@
 const jwt = require("jsonwebtoken")
-const secret = require("../index")
+const {JWT_SECRET} = require("../config")
 
 
 // Middleware for handling auth
@@ -13,7 +13,7 @@ function adminMiddleware(req, res, next) {
     const jwtToken = words[1]
     // with this you can access the real token string which is on index one
 
-    const decodedValue = jwt.verify(jwtToken,secret)
+    const decodedValue = jwt.verify(jwtToken, JWT_SECRET)
     if(decodedValue.username){
         next()
     }
