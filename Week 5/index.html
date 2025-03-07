@@ -1,0 +1,38 @@
+<html>
+
+<body>
+    <div id="buttonParent">
+
+    </div>
+    <script>
+        // we are going to see the state, comp, and rerendering in the term of vanilla JS
+        // defining state
+        let state={
+            count:0
+        }
+
+        function onButtonPress(){
+            state.count++;
+            buttonComponentReRender()
+        }
+
+        // re-rendering happens here
+        function buttonComponentReRender(){
+            document.getElementById("buttonParent").innerHTML = "";
+            const component = buttonComponent(state.count);
+            document.getElementById('buttonParent').appendChild(component)
+        }
+
+        // logic of updation
+        function buttonComponent(count){
+            const button = document.createElement("button")
+            button.innerHTML = `Counter ${count}`
+            button.setAttribute("onclick",`onButtonPress()`)
+            return button
+        }
+
+        // in normal js we have to manually trigger the rendering for the first time so this will do that
+        buttonComponentReRender()
+    </script>
+</body>
+</html>
