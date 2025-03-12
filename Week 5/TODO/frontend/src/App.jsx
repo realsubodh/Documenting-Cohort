@@ -1,14 +1,20 @@
-import { useState } from 'react'
-import './App.css'
-
+import { useState } from "react";
+import "./App.css";
+import { CreateTodo } from "./components/CreateTodo";
+import { Todos } from "./components/Todos";
 function App() {
-  const [count, setCount] = useState(0)
-
+  const [todos, setTodos] = useState([]);
+  fetch('https://localhost:3000/todos')
+    .then(async function(res){
+      const json = await res.json()
+      setTodos(json.todos)
+    })
   return (
     <>
-      hii there
+      <CreateTodo />
+      <Todos todos={todos}/>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
