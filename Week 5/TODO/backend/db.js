@@ -8,7 +8,7 @@
 
 
 const mongoose = require("mongoose")
-mongoose.connect("your url")
+mongoose.connect("mongodb+srv://subodhsingh3477:FridaY7880@cluster0.k5y3sbt.mongodb.net/")
 const todoSchema = mongoose.Schema({
     title: String,
     description: String,
