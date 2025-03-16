@@ -1,41 +1,49 @@
-import { Fragment, useState } from 'react'
-import './App.css'
+import React, { Fragment, useState} from "react";
+import "./App.css";
 
+
+// we are going to initialize a global variable for updating the id of the todos after spreading it
+let counter = 4;
 function App() {
+  const [todos, setTodos] = useState([{
+    id:1,
+    title: "go to gym",
+    description:"working on shredded body"
+  },
+  {
+    id:2,
+    title: "go to movie",
+    description:"watching the diplomat"
+  },
+  {
+    id:3,
+    title: "go to lab",
+    description:"working on react js"
+  },
+]);
 
+function addTodo(){
+  // spread function 
+  setTodos([...todos, {
+    id:counter++,
+    title: Math.random(),
+    description: Math.random()
+  }])
+}
+ 
   return (
-    // remember you can never return two or more child elements at once without any parent element
-    // in this below example the outer div worked as the parent element for the header ones
-  //  <div>
-  //   <Header title="subodh1"></Header>
-  //   <Header title="subodh2"></Header>
-  //  </div>
-
-  // another way instead of using div
-  <Fragment>
-    <HeaderWithButton></HeaderWithButton>
-    <Header title ="hARKIRAT"></Header>
-    <Header title ="harkirat1"></Header>
-  </Fragment>
-  )
+  <div>
+    <button onClick={addTodo}>Add a Todo</button>
+    {/* This below fn for iterating over the todos */}
+    {todos.map(todo => <Todo title={todo.title} description={todo.description}></Todo>) }
+  </div>
+  );
 }
 
-function HeaderWithButton(){
-  const [title, setTitle] = useState("My name is Subodh")
-  function updateTitle(){
-     setTitle("My name is "+ Math.random())
-  }
-
+function Todo({title, description}){
   return <div>
-    <button onClick={updateTitle}>Update the title</button>
-    <Header title ={title}></Header>
+    <h1>{title}</h1>
+    <h5>{description}</h5>
   </div>
 }
-// destructuring
-// component creation 
-function Header({title}){
-  return <div>
-    {title}
-  </div>
-}
-export default App
+export default App;
