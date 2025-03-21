@@ -1,4 +1,4 @@
-// question statement
+// question statement useEffect
 /*
     we have to write a code in which if a user clicks on the buttons then the specific output renders
     on the screen which is kinda of pre set values
