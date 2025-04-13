@@ -1,48 +1,58 @@
-import { useContext, useState } from "react";
-import { CountContext } from "./context";
+// App.jsx
+import React from "react";
+import { RecoilRoot, useSetRecoilState, useRecoilValue } from "recoil";
+import { countAtom, evenSelector } from "../store/atoms/count";
 
-
-function App(){
-  const [count,setCount] = useState(0)
-
-  // wrap anyone that wants to use the teleported value inside a provider
-  // context api == teleporter
+function App() {
   return (
     <div>
-      <CountContext.Provider value ={count}>
-      <Count count={count} setCount={setCount}/>
-      </CountContext.Provider>
+      <RecoilRoot>
+        <Count />
+      </RecoilRoot>
     </div>
-  )
+  );
 }
 
-function Count({count, setCount}){
-return <div>
-  <CountRenderer count={count}/>
-  <Buttons count={count} setCount={setCount}/>
-</div>
-} 
+function Count() {
+  console.log("re-rendering is happening here")
+  return (
+    <div>
+      <CountRenderer />
+      <Buttons />
+    </div>
+  );
+}
 
-function CountRenderer(){
-  const count = useContext(CountContext)
+function CountRenderer() {
+  const count = useRecoilValue(countAtom);
+  return (
+    <div>
+      <b>{count}</b>
+      <EvenCountRenderer/>
+    </div>
+  );
+}
+
+function EvenCountRenderer(){
+  const isEven = useRecoilValue(evenSelector)
+  // fancy way of writing conditional statement
   return <div>
-    {count}
+    {isEven ? "It is even": null} 
   </div>
 }
-function Buttons({setCount}){
-  const count = useContext(CountContext)
-return <div>
-  <button onClick={()=>{
-     setCount(count + 1)
-  }}>
-    Increase
-  </button>
+function Buttons() {
+  // there is one more slightly better approach for building this product
+  // we need only setCount, there is no need of the count here so we can remove the count by using ::
 
-  <button onClick={()=>{
-    setCount(count -1)
-  }}>
-    Descrease
-  </button>
-</div>
+  const setCount = useSetRecoilState(countAtom);
+  return (
+    <div>
+      <button onClick={() => setCount(count => count + 1)}>Increase</button>
+      <button onClick={() => setCount(count => count - 1)}>Decrease</button>
+    </div>
+  );
 }
-export default App
+
+
+// The most expensive part of the react is updating the dom hence we need to minimize the number of re render as much as possible.
+export default App;
