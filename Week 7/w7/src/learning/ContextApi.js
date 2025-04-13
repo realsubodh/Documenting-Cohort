@@ -21,7 +21,7 @@ return <div>
   <CountRenderer count={count}/>
   <Buttons count={count} setCount={setCount}/>
 </div>
-} 
+}
 
 function CountRenderer(){
   const count = useContext(CountContext)
