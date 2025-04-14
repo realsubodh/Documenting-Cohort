@@ -35,7 +35,7 @@ function CountRenderer() {
 
 function EvenCountRenderer(){
   const isEven = useRecoilValue(evenSelector)
-  // fancy way of writing conditional statement
+  // fancy way of writing conditional statement 
   return <div>
     {isEven ? "It is even": null} 
   </div>
