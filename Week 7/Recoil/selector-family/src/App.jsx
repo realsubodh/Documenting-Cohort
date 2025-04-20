@@ -16,7 +16,7 @@ function Todo({id}) {
   return (
     <>
       {todo.title}
-      {todo.description}
+     
       <br />
     </>
   )
