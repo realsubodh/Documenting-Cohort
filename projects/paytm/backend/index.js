@@ -5,6 +5,8 @@ const cors = require("cors")
 
 app.use(cors())
 app.use(express.json())
+// remember cors order matters you have to must put it on the top, like in the current place
+
 const app = express()
 
 app.use("/api/v1", mainRouter)
