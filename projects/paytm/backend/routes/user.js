@@ -4,7 +4,7 @@ const zod = require("zod");
 const jwt = require("jsonwebtoken");
 const JWT_SECRET = require("../config");
 const { authMiddleware } = require("../middleware");
-const { User } = require("../db");
+const { User, Account } = require("../db");
 
 //signup route | zod validation
 const signupSchema = zod.object({
@@ -31,6 +31,14 @@ router.post("/signup", async (req, res) => {
       message: "email already taken/ incorrect inputs",
     });
   }
+
+  // giving some random amount to user b/w 1 to 10k
+  await Account.create({
+    userId,
+    balance: 1+ Math.random()*10000
+  })
+
+
   const dbUser = await User.create(body);
   const token = jwt.sign(
     {
@@ -48,7 +56,7 @@ router.post("/signup", async (req, res) => {
 // creating the signin end point
 // first define the zod validation
 const signinSchema = zod.object({
-  username: zod.string.email(),
+  username: zod.string().email(),
   password: zod.string(),
 });
 

@@ -47,7 +47,7 @@ const accountSchema = new mongoose.Schema({
     required: true
   }
 })
-
+// we have use type and ref above just to make sure that the be have strict limitations, in case any bug in be hits, it will not affect the architecture of whole be database 
 
 // creating the model
 const Account = mongoose.model('Account', accountSchema )
