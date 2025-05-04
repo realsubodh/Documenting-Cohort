@@ -9,6 +9,11 @@ router.get("/balance", authMiddleware, async(req,res)=>{
     const account = await Account.findOne({
         userId: req.userId
     })
+    if(!account){
+        return res.status(404).json({
+            message:"Account not found!"
+        })
+    }
     res.json({
         balance: account.balance
     })
@@ -24,7 +29,7 @@ router.post("/transfer", authMiddleware, async(req,res)=>{
     //fetching the accounts within the transaction
     const account = await Account.findOne({userId: req.userId}).session(session)
 
-    if(!accounnt || account.balance<amount){
+    if(!account || account.balance<amount){
         await session.abortTransaction();
         return res.status(400).json({
             message: "insufficient balance!!"

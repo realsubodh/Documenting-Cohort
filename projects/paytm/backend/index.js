@@ -1,5 +1,5 @@
 const express = require("express");
-const mainRouter = require("./routes/index")
+const rootRouter = require("./routes/index")
 const cors = require("cors")
 const app = express()
 
@@ -9,7 +9,7 @@ app.use(express.json())
 
 
 
-app.use("/api/v1", mainRouter)
+app.use("/api/v1", rootRouter)
 // all requests coming in /api/v1 will go in mainRouter which is normally the index.js file in routes 
 // more production way of writing the code, like u can directly move the api request in version two from creating a new similiar route request
 // this is just a better structuring of the app thats it, read the code in mainRoute u will understand each and everything.
