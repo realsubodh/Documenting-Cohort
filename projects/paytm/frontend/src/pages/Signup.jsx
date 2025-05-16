@@ -5,6 +5,7 @@ import { InputBox } from "../components/InputBox"
 import { Button } from "../components/Button"
 import { BottomWarning } from "../components/BottomWarning"
 import axios from "axios"
+import { useNavigate } from "react-router-dom"
 
 export const Signup =()=>{
     const [firstName, setFirstName] = useState("")
@@ -38,6 +39,7 @@ export const Signup =()=>{
                 })
                 localStorage.setItem("token", response.data.token) // way of stroing the token in localstorage for continuos session login
                 // remember this is not the html button, this is the component and in Button.jsx onclick is pass in original html button
+                navigate("/dashboard")
             }} label={"Sign up"}/>
             </div>
             <BottomWarning label={"Already have an account?"} buttonText={"Sign in"} to={"/signin"}/>
