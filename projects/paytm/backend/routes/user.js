@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const zod = require("zod");
 const jwt = require("jsonwebtoken");
-const JWT_SECRET = require("../config");
+const {JWT_SECRET} = require("../config");
 const { authMiddleware } = require("../middleware");
 const { User, Account } = require("../db");
 
@@ -17,8 +17,8 @@ router.post("/signup", async (req, res) => {
   const body = req.body;
   const { success } = signupSchema.safeParse(req.body);
   if (!success) {
-    return res.json({
-      message: "email already taken/incorrect inputs",
+    return res.status(400).json({
+      message: "Invalid input fields. Please check your data.",
     });
   }
 
@@ -27,8 +27,8 @@ router.post("/signup", async (req, res) => {
   });
 
   if (existingUser) {
-    return res.json({
-      message: "email already taken/ incorrect inputs",
+    return res.status(409).json({
+      message: "Email already taken.",
     });
   }
 
@@ -48,7 +48,6 @@ router.post("/signup", async (req, res) => {
       userId: user._id,
     },
     JWT_SECRET,
-    { expiresIn: '7d' }
   );
 
 
@@ -85,7 +84,6 @@ router.post("/signin", async (req, res) => {
         userId: user._id,
       },
       JWT_SECRET,
-      { expiresIn: '7d' }
     );
     return res.json({
       token: token,
