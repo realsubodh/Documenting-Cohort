@@ -1,0 +1,5 @@
+{
+    "terminal.integrated.commandsToSkipShell": [
+        "{   \"typescript.tsdk\": \"node_modules/typescript/lib\" }"
+    ]
+}
