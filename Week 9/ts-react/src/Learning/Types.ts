@@ -30,6 +30,7 @@ const t: TechLead ={
     startDate: new Date(),
     department: "asdasdf"
 }
+console.log(t)
 
 // Arrays
 type numberArr = number[];
@@ -41,3 +42,32 @@ function maxVal(arr: numberArr){
     }
 }
 maxVal([1,2,3])
+
+// Enums 
+// enums provide easy readibility of constants. 
+enum Direction{
+    Up,
+    Down,
+    Left,
+    Right
+}
+
+function DoSomething(keypressed: Direction){
+    if(keypressed == Direction.Up){
+        // do something logic
+    }
+}
+
+DoSomething(Direction.Down);
+DoSomething(Direction.Up);  
+
+// Generics 
+// makes type variable, dynamic and resusable
+
+function identity<T>(arg:T){
+    return arg;
+}
+
+let output1 = identity<string>("myString");
+let output2 = identity<number>(100)
+console.log(output1, output2);
